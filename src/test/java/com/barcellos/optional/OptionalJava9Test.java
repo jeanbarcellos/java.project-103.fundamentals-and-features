@@ -2,8 +2,10 @@ package com.barcellos.optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -107,4 +109,46 @@ public class OptionalJava9Test {
         assertThat(successCounter.get()).isEqualTo(0);
         assertThat(onEmptyOptionalCounter.get()).isEqualTo(1);
     }
+
+    // 4. O método stream()
+
+    /**
+     * O último método, que é adicionado à classe Optional no Java 9, é o método
+     * stream() .
+     *
+     * Java tem uma API Stream muito fluente e elegante que pode operar nas coleções
+     * e utiliza muitos conceitos de programação funcional. A versão Java mais
+     * recente introduz o método stream() na classe Optional que nos permite tratar
+     * a instância Optional como um Stream.
+     *
+     * Digamos que temos um Optional definido e estamos chamando o método stream()
+     * nele. Isso criará um Stream de um elemento no qual podemos usar todos os
+     * métodos disponíveis na API Stream :
+     */
+    @Test
+    public void givenOptionalOfSome_whenToStream_thenShouldTreatItAsOneElementStream() {
+        // given
+        Optional<String> value = Optional.of("a");
+
+        // when
+        List<String> collect = value.stream().map(String::toUpperCase).collect(Collectors.toList());
+
+        // then
+        assertThat(collect).hasSameElementsAs(List.of("A"));
+    }
+
+    @Test
+    public void givenOptionalOfNone_whenToStream_thenShouldTreatItAsZeroElementStream() {
+        // given
+        Optional<String> value = Optional.empty();
+
+        // when
+        List<String> collect = value.stream()
+                .map(String::toUpperCase)
+                .collect(Collectors.toList());
+
+        // then
+        assertThat(collect).isEmpty();
+    }
+
 }
