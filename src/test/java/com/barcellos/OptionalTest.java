@@ -66,4 +66,31 @@ public class OptionalTest {
         assertFalse(opt.isPresent());
     }
 
+    /**
+     * Quando temos um objeto Optional retornado de um método ou criado por nós,
+     * podemos verificar se há um valor nele ou não com o método isPresent()
+     *
+     * Este método retorna true se o valor encapsulado não for nulo.
+     */
+    @Test
+    public void givenOptional_whenIsPresentWorks_thenCorrect() {
+        Optional<String> opt = Optional.of("Baeldung");
+        assertTrue(opt.isPresent());
+
+        opt = Optional.ofNullable(null);
+        assertFalse(opt.isPresent());
+    }
+
+    /**
+     * a partir do Java 11, podemos fazer o oposto com o método isEmpty
+     */
+    @Test
+    public void givenAnEmptyOptional_thenIsEmptyBehavesAsExpected() {
+        Optional<String> opt = Optional.of("Baeldung");
+        assertFalse(opt.isEmpty());
+
+        opt = Optional.ofNullable(null);
+        assertTrue(opt.isEmpty());
+    }
+
 }
