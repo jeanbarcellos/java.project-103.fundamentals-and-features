@@ -142,4 +142,35 @@ public class OptionalTest {
         assertEquals("john", name);
     }
 
+    // 7. Difference Between orElse and orElseGet()
+
+    public String getMyDefault() {
+        System.out.println("Getting Default Value");
+        return "Default Value";
+    }
+
+    @Test
+    public void whenOrElseGetAndOrElseOverlap_thenCorrect() {
+        String text = null;
+
+        String defaultText = Optional.ofNullable(text).orElseGet(this::getMyDefault);
+        assertEquals("Default Value", defaultText);
+
+        defaultText = Optional.ofNullable(text).orElse(getMyDefault());
+        assertEquals("Default Value", defaultText);
+    }
+
+    @Test
+    public void whenOrElseGetAndOrElseDiffer_thenCorrect() {
+        String text = "Text present";
+
+        System.out.println("Using orElseGet:");
+        String defaultText = Optional.ofNullable(text).orElseGet(this::getMyDefault);
+        assertEquals("Text present", defaultText);
+
+        System.out.println("Using orElse:");
+        defaultText = Optional.ofNullable(text).orElse(getMyDefault());
+        assertEquals("Text present", defaultText);
+    }
+
 }
