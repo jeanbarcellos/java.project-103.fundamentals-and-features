@@ -93,4 +93,23 @@ public class OptionalTest {
         assertTrue(opt.isEmpty());
     }
 
+    // 4. Ação condicional com ifPresent()
+
+    /**
+     * O método ifPresent() nos permite executar algum código no valor encapsulado
+     * se ele for não nulo.
+     *
+     * Antes de Optional faríamos:
+     *
+     * if(name != null) {
+     * System.out.println(name.length());
+     * }
+     */
+    @Test
+    public void givenOptional_whenIfPresentWorks_thenCorrect() {
+        Optional<String> opt = Optional.of("baeldung");
+
+        opt.ifPresent(name -> System.out.println(name.length()));
+    }
+
 }
