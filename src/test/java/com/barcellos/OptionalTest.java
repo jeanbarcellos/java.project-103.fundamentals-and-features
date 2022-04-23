@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -171,6 +172,35 @@ public class OptionalTest {
         System.out.println("Using orElse:");
         defaultText = Optional.ofNullable(text).orElse(getMyDefault());
         assertEquals("Text present", defaultText);
+    }
+
+    // 8. Exceções com orElseThrow()
+
+    /**
+     * O método orElseThrow() segue orElse() e orElseGet() e adiciona uma nova
+     * abordagem para lidar com um valor ausente.
+     *
+     * Em vez de retornar um valor padrão quando o valor encapsulado não está
+     * presente, ele lança uma exceção
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void whenOrElseThrowWorks_thenCorrect() {
+        String nullName = null;
+
+        String name = Optional.ofNullable(nullName).orElseThrow(
+                IllegalArgumentException::new);
+    }
+
+    /**
+     * O Java 10 introduziu uma versão simplificada sem argumentos do método
+     * orElseThrow().
+     * No caso de um Optional vazio, lança um NoSuchElementException
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void whenNoArgOrElseThrowWorks_thenCorrect() {
+        String nullName = null;
+
+        String name = Optional.ofNullable(nullName).orElseThrow();
     }
 
 }
