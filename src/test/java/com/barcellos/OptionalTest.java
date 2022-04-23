@@ -1,5 +1,6 @@
 package com.barcellos;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -110,6 +111,20 @@ public class OptionalTest {
         Optional<String> opt = Optional.of("baeldung");
 
         opt.ifPresent(name -> System.out.println(name.length()));
+    }
+
+    /**
+     * O método orElse() é usado para recuperar o valor encapsulado em uma instância
+     * Optional.
+     */
+    @Test
+    public void whenOrElseWorks_thenCorrect() {
+        String nullName = null;
+        String defaultName = "john";
+
+        String name = Optional.ofNullable(nullName).orElse(defaultName);
+
+        assertEquals(defaultName, name);
     }
 
 }
