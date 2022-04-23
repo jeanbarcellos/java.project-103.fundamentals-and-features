@@ -114,6 +114,8 @@ public class OptionalTest {
         opt.ifPresent(name -> System.out.println(name.length()));
     }
 
+    // 5. Default Value With orElse()
+
     /**
      * O método orElse() é usado para recuperar o valor encapsulado em uma instância
      * Optional.
@@ -201,6 +203,41 @@ public class OptionalTest {
         String nullName = null;
 
         String name = Optional.ofNullable(nullName).orElseThrow();
+    }
+
+    // 9. Returning Value With get()
+
+    /**
+     * A abordagem final para recuperar o valor encapsulado é o método get()
+     */
+    @Test
+    public void givenOptional_whenGetsValue_thenCorrect() {
+        Optional<String> opt = Optional.of("baeldung");
+
+        String name = opt.get();
+
+        assertEquals("baeldung", name);
+    }
+
+    /**
+     * No entanto, ao contrário das três abordagens anteriores, get() só pode
+     * retornar um valor se o objeto encapsulado não for null; caso contrário, ele
+     * lança uma exceção de nenhum elemento.
+     *
+     * Esta é a principal falha do método get().
+     *
+     * Idealmente, Opcional deve nos ajudar a evitar tais exceções imprevistas.
+     * Portanto, essa abordagem funciona de acordo com os objetivos de Optional e
+     * provavelmente será preterida em uma versão futura.
+     *
+     * Portanto, é aconselhável usar as outras variantes que nos permitem preparar e
+     * lidar explicitamente com o caso nulo .
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void givenOptionalWithNull_whenGetThrowsException_thenCorrect() {
+        Optional<String> opt = Optional.ofNullable(null);
+
+        String name = opt.get();
     }
 
 }
