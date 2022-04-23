@@ -127,4 +127,19 @@ public class OptionalTest {
         assertEquals(defaultName, name);
     }
 
+    /**
+     * O método orElseGet() é semelhante ao orElse().
+     * Porém, ao invés de pegar um valor para retornar se o valor Optional não
+     * estiver presente, ele pega uma interface funcional do fornecedor, que é
+     * invocada e retorna o valor da invocação
+     */
+    @Test
+    public void whenOrElseGetWorks_thenCorrect() {
+        String nullName = null;
+
+        String name = Optional.ofNullable(nullName).orElseGet(() -> "john");
+
+        assertEquals("john", name);
+    }
+
 }
