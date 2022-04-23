@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.Test;
@@ -461,6 +462,24 @@ public class OptionalTest {
                 .orElseGet(() -> "default");
 
         assertEquals("default", found);
+    }
+
+    // 15. Misuse of Optionals
+
+    public static List<Person> search(List<Person> people, String name) {
+        return doSearch(people, name, 0);
+    }
+
+    public static List<Person> search(List<Person> people, String name, int age) {
+        return doSearch(people, name, age);
+    }
+
+    private static List<Person> doSearch(List<Person> people, String name, int age) {
+        // Null checks for people and name
+        return people.stream()
+                .filter(p -> p.getName().equals(name))
+                .filter(p -> p.getAge().get().intValue() >= age)
+                .collect(Collectors.toList());
     }
 
 }
