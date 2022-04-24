@@ -447,4 +447,16 @@ public class OptionalTest {
                 .collect(Collectors.toList());
     }
 
+    /*
+     * when CreatesEmptyOptional
+     * then Correct
+     *
+     * given NonNull
+     * when CreatesNonNullable
+     * then Correct
+     *
+     * should ReturnTrue
+     * should ThrowsException
+     */
+
 }

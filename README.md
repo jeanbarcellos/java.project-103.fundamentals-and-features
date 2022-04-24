@@ -91,11 +91,65 @@ List<String> resultList
 
     - Este código usa a operação terminal collect() para reduzir um `Stream<String>` para `List<String>`.
 
+Java 8 oferece a possibilidade de criar fluxos de três tipos primitivos: int, long e double.
+
+Como Stream<T> é uma interface genérica, e não há como usar primitivos como parâmetro de tipo com genéricos, três novas interfaces especiais foram criadas: **_IntStream_**, **_LongStream_**, **_DoubleStream_**
+
+```java
+IntStream intStream = IntStream.range(1, 3);
+LongStream longStream = LongStream.rangeClosed(1, 3);
+```
+
 ### Referências:
 
 - https://github.com/loiane/java8-tutorial#streams
 - https://www.baeldung.com/java-8-streams-introduction
 - https://www.baeldung.com/java-8-streams
+
+<br>
+<br>
+
+## Interfaces funcionais integradas
+
+### Predicates
+
+.
+
+### Functions
+
+.
+
+### Supplier
+
+A interface `Supplier` do Java 8, nada mais é do que uma interface funcional, basicamente ela não aceita argumentos e retorna um resultado.
+
+Os Suppliers produzem um resultado de um determinado tipo genérico. Ao contrário das _Functions_, os _Supliers_ não aceitam argumentos.
+
+Exemplo 1:
+
+```java
+Supplier<Person> personSupplier = Person::new;
+personSupplier.get();   // new Person
+```
+
+Exempo 2:
+
+```java
+// Retornar a data atual
+Supplier<LocalDate> supplierLocalDate = () -> LocalDate.now();
+
+// Note que criamos uma instância do tipo Supplier que recebe uma lambda expression que retorna a data atual
+
+// Como o Supplier recebe uma expressão lambda, ainda podemos simplificar nosso código da seguinte forma
+
+Supplier<LocalDate> supplierLocalDate = LocalDate::now;
+```
+
+### Consumers
+
+#### Referencias
+
+- https://receitasdecodigo.com.br/java/exemplos-supplier-java-8
 
 ## Imports
 
