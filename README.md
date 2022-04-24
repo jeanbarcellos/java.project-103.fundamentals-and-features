@@ -31,3 +31,4 @@ import java.util.stream.Stream;
 - https://www.baeldung.com/java-optional
 - https://www.baeldung.com/java-9-optional
 - http://www.dsc.ufcg.edu.br/~jacques/cursos/p2/html/ed/colecoes.htm
+- https://github.com/loiane/java8-tutorial

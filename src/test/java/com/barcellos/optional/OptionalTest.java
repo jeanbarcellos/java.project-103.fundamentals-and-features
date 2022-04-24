@@ -152,7 +152,7 @@ public class OptionalTest {
 
     // 7. Difference Between orElse and orElseGet()
 
-    public String getMyDefault() {
+    private String getMyDefault() {
         System.out.println("Getting Default Value");
         return "Default Value";
     }
@@ -259,19 +259,7 @@ public class OptionalTest {
         assertFalse(is2017);
     }
 
-    public class Modem {
-        private Double price;
-
-        public Modem(Double price) {
-            this.price = price;
-        }
-
-        public Double getPrice() {
-            return price;
-        }
-    }
-
-    public boolean priceIsInRange1(Modem modem) {
+    private boolean priceIsInRange1(Modem modem) {
         boolean isInRange = false;
 
         if (modem != null && modem.getPrice() != null
@@ -292,7 +280,7 @@ public class OptionalTest {
         assertFalse(priceIsInRange1(null));
     }
 
-    public boolean priceIsInRange2(Modem modem2) {
+    private boolean priceIsInRange2(Modem modem2) {
         return Optional.ofNullable(modem2)
                 .map(Modem::getPrice)
                 .filter(p -> p >= 10)
@@ -354,29 +342,6 @@ public class OptionalTest {
     }
 
     // 12. Transforming Value With flatMap()
-
-    public class Person {
-        private String name;
-        private int age;
-        private String password;
-
-        public Optional<String> getName() {
-            return Optional.ofNullable(name);
-        }
-
-        public Optional<Integer> getAge() {
-            return Optional.ofNullable(age);
-        }
-
-        public Optional<String> getPassword() {
-            return Optional.ofNullable(password);
-        }
-
-        public Person(String name, int age) {
-            this.name = name;
-            this.age = age;
-        }
-    }
 
     @Test
     public void givenOptional_whenFlatMapWorks_thenCorrect2() {
