@@ -9,6 +9,12 @@ Objetos Opcionais
 - _Optional_ deve ser usado como um tipo de retorno.
 - Não é recomendado tentar usá-lo como um tipo de campo.
 
+## Collections
+
+- Listas
+- Conjuntos
+- Mapas
+
 ## Imports
 
 ```java
@@ -24,3 +30,4 @@ import java.util.stream.Stream;
 
 - https://www.baeldung.com/java-optional
 - https://www.baeldung.com/java-9-optional
+- http://www.dsc.ufcg.edu.br/~jacques/cursos/p2/html/ed/colecoes.htm
