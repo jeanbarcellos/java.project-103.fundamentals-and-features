@@ -41,23 +41,23 @@ Objetos Opcionais
 
 ## Stream
 
-A `java.util.Stream`representa uma sequência de elementos nos quais uma ou mais operações podem ser executadas.
+A `java.util.Stream` representa uma sequência de elementos nos quais uma ou mais operações podem ser executadas.
 
-As operações de fluxo são intermediárias ou terminais
+As operações de fluxo são **intermediárias** ou **terminais**
 
 As coleções no Java 8 são estendidas para que se possa simplesmente criar fluxos chamando `Collection.stream()`;
 
-A API de `stream` ajuda a substituir os loops , for-each e while. Permite concentrar-se na lógica da operação, mas não na iteração sobre a sequência de elementos.
+A API de `stream` ajuda a substituir os loops , for-each e while. Permite concentrar-se na lógica da operação, mas não na iteração sobre a _sequência_ de elementos.
 
-**Filtering** - Filtro
+**Filtering (filter)** - Filtro
 
 O método `filter()` nos permite escolher um fluxo de elementos que satisfaçam um predicado.
 
-**Mapping** - Mapeando
+**Mapping (map)** - Mapeando
 
 Pode-se usar o método `map()` para converter elementos de um Stream aplicando uma função especial a eles e coletar esses novos elementos em um `Stream`.
 
-**Matching** - Coincidindo
+**Matching (match)** - Coincidindo
 
 Fornece um conjunto útil de instrumentos para validar elementos de uma sequência de acordo com algum predicado. Para fazer isso, um dos seguintes métodos pode ser usado: `anyMatch()`, `allMatch()`, `noneMatch()`
 
@@ -67,7 +67,7 @@ boolean isValidOne = list.stream().allMatch(element -> element.contains("h")); /
 boolean isValidTwo = list.stream().noneMatch(element -> element.contains("h")); // false
 ```
 
-**Reduction** - Redução
+**Reduction (reduce)** - Redução
 
 Permite reduzir uma sequência de elementos a algum valor de acordo com uma função especificada com a ajuda do método `reduce()` do tipo `Stream`.
 
@@ -83,6 +83,14 @@ Integer reduced = integers.stream().reduce(23, (a, b) -> a + b);
 - A redução também pode ser fornecida pelo método `collect()` do tipo `Stream`.
 - Esta operação é muito útil no caso de converter um fluxo em uma **Collection** ou **Map** e representar um fluxo na forma de uma única string.
 - Existe uma classe de utilitário Collectors que fornece uma solução para quase todas as operações típicas de coleta.
+
+**Count** - Contagem
+
+Count é uma operação de _terminal_ que retorna o número de elementos no fluxo como um arquivo `long`.
+
+**Sorted (sort)** - Classificação
+
+Sorted é uma operação _intermediária_ que retorna uma exibição classificada do fluxo. Os elementos são classificados em ordem natural, a menos que você passe um custom `Comparator`.
 
 ```java
 List<String> resultList
@@ -108,22 +116,86 @@ LongStream longStream = LongStream.rangeClosed(1, 3);
 
 <br>
 <br>
+<br>
 
 ## Interfaces funcionais integradas
 
-### Predicates
+### **Predicates** - Predicados
 
-.
+Os `Predicates` são funções que aceitam um argumento do tipo `T` e produzem resultado de valor booleano.
 
-### Functions
+A interface contém vários métodos padrão para compor predicados para termos lógicos complexos (e, ou, nega)
 
-.
+Interface:
 
-### Supplier
+```java
+public interface Predicate<T> {
+
+  boolean test(T t);
+}
+```
+
+Exemplos:
+
+```java
+Predicate<String> predicate = (s) -> s.length() > 0;
+
+predicate.test("foo");              // true
+predicate.negate().test("foo");     // false
+
+Predicate<Boolean> nonNull = Objects::nonNull;
+Predicate<Boolean> isNull = Objects::isNull;
+
+Predicate<String> isEmpty = String::isEmpty;
+Predicate<String> isNotEmpty = isEmpty.negate();
+```
+
+<br>
+
+### **Functions** - Funções
+
+As `functions` aceitam um argumento e produzem um resultado.
+
+Os métodos padrão podem ser usados ​​para encadear várias funções juntas (compose eThen).
+
+Interface:
+
+```java
+public interface Function<T, R> {
+
+   R apply(T t);
+}
+```
+
+Exemplos:
+
+```java
+Function<String, Integer> toInteger = Integer::valueOf;
+Function<String, String> backToString = toInteger.andThen(String::valueOf);
+
+backToString.apply("123");     // "123"
+```
+
+<br>
+
+### **Supplier** - Fornecedores
+
+Representa um _fornecedor_ de resultados.
 
 A interface `Supplier` do Java 8, nada mais é do que uma interface funcional, basicamente ela não aceita argumentos e retorna um resultado.
 
 Os Suppliers produzem um resultado de um determinado tipo genérico. Ao contrário das _Functions_, os _Supliers_ não aceitam argumentos.
+
+Interface:
+
+```java
+public interface Supplier<Tout> {
+
+   T get();
+}
+```
+
+Exemplos:
 
 Exemplo 1:
 
@@ -145,7 +217,27 @@ Supplier<LocalDate> supplierLocalDate = () -> LocalDate.now();
 Supplier<LocalDate> supplierLocalDate = LocalDate::now;
 ```
 
-### Consumers
+<br>
+
+### **Consumers** - Consumidores
+
+Os consumidores representam as operações a serem executadas em um único argumento de entrada
+
+Interface:
+
+```java
+public interface Consumer<Tint> {
+
+   void accept(T t);
+}
+```
+
+Exemplos:
+
+```java
+Consumer<Person> greeter = (p) -> System.out.println("Hello, " + p.firstName);
+greeter.accept(new Person("Luke", "Skywalker"));
+```
 
 #### Referencias
 
