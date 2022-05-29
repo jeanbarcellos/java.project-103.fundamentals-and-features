@@ -243,6 +243,12 @@ greeter.accept(new Person("Luke", "Skywalker"));
 
 - https://receitasdecodigo.com.br/java/exemplos-supplier-java-8
 
+## JPA
+
+[Spring Data](jpa-spring.md)
+
+[Panache](jpa-panache.md)
+
 ## Imports
 
 ```java
