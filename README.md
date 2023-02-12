@@ -1,6 +1,6 @@
 _Repositório apenas para estudo_
 
-# Project Demo 103 - Fundamentos e funcionalidades
+# Project 103 - Fundamentos e funcionalidades
 
 Demo para revisão de fundamentos e funcionalidades do JAVA 8
 
@@ -53,7 +53,7 @@ A API de `stream` ajuda a substituir os loops , for-each e while. Permite concen
 
 O método `filter()` nos permite escolher um fluxo de elementos que satisfaçam um predicado.
 
-**Mapping (map)** - Mapeando
+**Mapping (map)** - Mapeamento
 
 Pode-se usar o método `map()` para converter elementos de um Stream aplicando uma função especial a eles e coletar esses novos elementos em um `Stream`.
 
@@ -243,11 +243,15 @@ greeter.accept(new Person("Luke", "Skywalker"));
 
 - https://receitasdecodigo.com.br/java/exemplos-supplier-java-8
 
+<br>
+<br>
+<br>
+
 ## JPA
 
 [Spring Data](jpa-spring.md)
 
-[Panache](jpa-panache.md)
+[Panache ORM](jpa-panache.md)
 
 ## Imports
 
